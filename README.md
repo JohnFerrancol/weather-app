@@ -57,5 +57,6 @@ npm run serve
 ## Roadmap
 
 - [x] Extracting data from the Visual Crossing Weather API and processing the JSON data obtained from the API to only the data we want
-- [ ] Setting up a form to take in User Input on the location they want to see
+- [x] Setting up a form to take in User Input on the location they want to see
 - [x] Display the weather information on the webpage
+- [ ] Adding a function for the user the toggle between Imperials and Metric units

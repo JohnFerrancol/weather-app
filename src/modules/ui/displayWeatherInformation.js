@@ -1,7 +1,7 @@
 import feelsLikeIcon from '../../assets/logos/thermometer-alert.svg';
 import humidityIcon from '../../assets/logos/water-percent.svg';
 import precipProbIcon from '../../assets/logos/cloud-percent.svg';
-import precipIcon from '../../assets/logos/weather-pouring.svg';
+import windSpeedIcon from '../../assets/logos/weather-windy.svg';
 
 export default (processedData) => {
   let weatherInformation = document.querySelector('div');
@@ -31,7 +31,7 @@ export default (processedData) => {
     feelslike: ['Feels Like', '°C', feelsLikeIcon],
     humidity: ['Humidity', '%', humidityIcon],
     precipprob: ['Chance of Rain', '%', precipProbIcon],
-    precip: ['Precipitation', 'mm', precipIcon],
+    windspeed: ['Wind Speed', 'km/h', windSpeedIcon],
   };
 
   for (let miscData in miscInformationData) {

@@ -8,8 +8,8 @@ export default (response) => {
     misc: {
       feelslike: currentConditions.feelslike,
       humidity: currentConditions.humidity,
-      precipprob: currentConditions.precipprob,
-      precip: currentConditions.precip,
+      precipprob: response.days[0].precipprob,
+      windspeed: currentConditions.windspeed,
     },
   };
 };
