@@ -1,4 +1,4 @@
-import handleLocationRefresh from '../data/handleLocationRefresh';
+import handleLocationRefresh from '../utils/handleLocationRefresh';
 
 export default async () => {
   const changeLocationForm = document.querySelector('.change-location-form');

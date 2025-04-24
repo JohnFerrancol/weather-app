@@ -89,6 +89,74 @@ main .submit-button {
   padding: 0.5rem 2rem;
 }
 
+main .toggle-units {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+main .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+main .switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+main .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+main .slider:before {
+  position: absolute;
+  content: '';
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+main input:checked + .slider {
+  background: var(--main-background);
+}
+
+main input:focus + .slider {
+  box-shadow: 0 0 1px #2196f3;
+}
+
+main input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+main .slider.round {
+  border-radius: 34px;
+}
+
+main .slider.round:before {
+  border-radius: 50%;
+}
+
 main .weather-information {
   display: flex;
   flex-direction: column;

@@ -59,4 +59,7 @@ npm run serve
 - [x] Extracting data from the Visual Crossing Weather API and processing the JSON data obtained from the API to only the data we want
 - [x] Setting up a form to take in User Input on the location they want to see
 - [x] Display the weather information on the webpage
-- [ ] Adding a function for the user the toggle between Imperials and Metric units
+- [x] Adding a function for the user the toggle between Imperials and Metric units
+- [ ] Changing a adding icons to change when the weather condition changes
+- [ ] Adding Geolocation to show local weather on load
+- [ ] Adding multi-day and hourly forecast
