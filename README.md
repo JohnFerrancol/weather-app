@@ -58,4 +58,4 @@ npm run serve
 
 - [x] Extracting data from the Visual Crossing Weather API and processing the JSON data obtained from the API to only the data we want
 - [ ] Setting up a form to take in User Input on the location they want to see
-- [ ] Display the weather information on the webpage
+- [x] Display the weather information on the webpage

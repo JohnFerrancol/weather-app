@@ -2,10 +2,14 @@ export default (response) => {
   const currentConditions = response.currentConditions;
 
   return {
+    resolvedAddress: response.resolvedAddress,
     currentCondition: currentConditions.conditions,
     temperature: currentConditions.temp,
-    feelslike: currentConditions.feelslike,
-    humidity: currentConditions.humidity,
-    precipprob: currentConditions.precipprob,
+    misc: {
+      feelslike: currentConditions.feelslike,
+      humidity: currentConditions.humidity,
+      precipprob: currentConditions.precipprob,
+      precip: currentConditions.precip,
+    },
   };
 };
