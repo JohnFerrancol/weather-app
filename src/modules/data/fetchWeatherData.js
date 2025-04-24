@@ -1,4 +1,4 @@
-const fetchWeatherData = async (location, unitGroup) => {
+export default async (location, unitGroup) => {
   const API_KEY = 'FYE3FRSLPHW96PES77BBKQUBS';
 
   const response = await fetch(
@@ -8,5 +8,3 @@ const fetchWeatherData = async (location, unitGroup) => {
 
   return data;
 };
-
-export { fetchWeatherData };

@@ -56,7 +56,6 @@ npm run serve
 
 ## Roadmap
 
-- [ ] Extracting data from the Visual Crossing Weather API
-- [ ] Processing the JSON data obtained from the API
+- [x] Extracting data from the Visual Crossing Weather API and processing the JSON data obtained from the API to only the data we want
 - [ ] Setting up a form to take in User Input on the location they want to see
 - [ ] Display the weather information on the webpage
