@@ -1,6 +1,6 @@
 # Weather App
 
-[Live Demo](#)<br/><br/>
+[Live Demo](https://johnferrancol.github.io/weather-app/)<br/><br/>
 [![The Odin Project](https://img.shields.io/badge/The%20Odin%20Project-A9792B?logo=theodinproject&logoColor=fff)](#)
 
 ## Overview
@@ -39,7 +39,7 @@ Getting started on running the webpack server to your localhost, localhost:8080
 1. Running the webpack server
 
 ```sh
-git clone git@github.com:JohnFerrancol/XX.git
+git clone git@github.com:JohnFerrancol/weather-app.git
 ```
 
 2. Installing npm packages
