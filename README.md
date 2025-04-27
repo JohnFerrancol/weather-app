@@ -17,7 +17,7 @@ This is a project from [The Odin Project](https://theodinproject.com): [Project:
 - [![HTML](https://img.shields.io/badge/HTML-%23E34F26.svg?logo=html5&logoColor=white)](#)
 - [![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=fff)](#)
 - [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=000)](#)
-- [![npm](htps://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)](#)
+- [![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=fff)](#)
 - [![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?&logo=webpack&logoColor=black)](#)
 
 ## Getting Started
