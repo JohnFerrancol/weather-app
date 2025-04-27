@@ -61,5 +61,5 @@ npm run serve
 - [x] Display the weather information on the webpage
 - [x] Adding a function for the user the toggle between Imperials and Metric units
 - [x] Changing a adding icons to change when the weather condition changes
-- [ ] Adding Hourly and Weekly Forecast
+- [x] Adding Hourly and Weekly Forecast
 - [ ] Adding Geolocation to show local weather on load

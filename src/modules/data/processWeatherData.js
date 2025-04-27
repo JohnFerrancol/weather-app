@@ -6,6 +6,7 @@ export default (response) => {
     currentCondition: currentConditions.conditions,
     temperature: currentConditions.temp,
     feelsLike: currentConditions.feelslike,
+    currentTime: currentConditions.datetime,
     misc: {
       uvIndex: currentConditions.uvindex,
       humidity: currentConditions.humidity,
@@ -14,6 +15,7 @@ export default (response) => {
     },
     icon: currentConditions.icon,
     forecastData: response.days,
+    forecastDataHours: response.days[0].hours,
     currentMinmaxTemp: {
       maxTemp: response.days[0].tempmax,
       minTemp: response.days[0].tempmin,

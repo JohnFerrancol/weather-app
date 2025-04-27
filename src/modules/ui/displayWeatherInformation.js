@@ -6,13 +6,21 @@ import mapMarkerIcon from '../../assets/logos/map-marker.svg';
 import arrowUpIcon from '../../assets/logos/arrow-up.svg';
 import arrowDownIcon from '../../assets/logos/arrow-down.svg';
 import checkToggle from './checkToggle';
-import { getDayOfTheWeek, formatDate } from '../utils/dateUtils';
+import { getDayOfTheWeek, formatDate, formatTime } from '../utils/dateUtils';
 
 export default (processedData) => {
   console.log(processedData);
   let weatherInformation = document.querySelector('.weather-information');
   weatherInformation.innerHTML = '';
 
+  renderCurrentConditionContainer(weatherInformation, processedData);
+  renderMiscInformationContainer(weatherInformation, processedData);
+  renderHourlyForecastContainer(weatherInformation, processedData);
+  renderDailyForecastContainer(weatherInformation, processedData);
+  checkToggle(processedData);
+};
+
+const renderCurrentConditionContainer = (weatherInformation, processedData) => {
   const currentConditionContainer = document.createElement('div');
   currentConditionContainer.classList.add('current-condition-container');
   weatherInformation.appendChild(currentConditionContainer);
@@ -108,7 +116,9 @@ export default (processedData) => {
   feelLikeTemperature.classList.add('feels-like-temperature');
   feelLikeTemperature.textContent = `Feels Like: ${processedData.feelsLike} °C`;
   currentConditionRight.appendChild(feelLikeTemperature);
+};
 
+const renderMiscInformationContainer = (weatherInformation, processedData) => {
   const miscInformationContainer = document.createElement('div');
   miscInformationContainer.classList.add('misc-information-container');
   weatherInformation.appendChild(miscInformationContainer);
@@ -149,6 +159,108 @@ export default (processedData) => {
     miscDataTextValue.textContent = `${miscDataTextNumber} ${miscInformationMapper[miscData][1]}`;
     miscallaneousDataText.appendChild(miscDataTextValue);
   }
+};
 
-  checkToggle(processedData);
+const renderHourlyForecastContainer = (weatherInformation, processedData) => {
+  const hourlyForecastTitle = document.createElement('h1');
+  hourlyForecastTitle.classList.add('hourly-forecast-title');
+  hourlyForecastTitle.textContent = 'Hourly';
+  weatherInformation.appendChild(hourlyForecastTitle);
+
+  const hourlyForecastContainer = document.createElement('div');
+  hourlyForecastContainer.classList.add('hourly-forecast-container');
+  weatherInformation.appendChild(hourlyForecastContainer);
+
+  const hourlyForecast = processedData.forecastDataHours;
+  hourlyForecast.forEach((hour) => {
+    const hourlyForecastWrapper = document.createElement('div');
+    hourlyForecastWrapper.classList.add('hourly-forecast-wrapper');
+    hourlyForecastContainer.appendChild(hourlyForecastWrapper);
+
+    const hourlyForecastTime = document.createElement('p');
+    hourlyForecastTime.classList.add('hourly-forecast-time');
+    hourlyForecastTime.textContent = formatTime(
+      new Date(`${processedData.forecastData[0].datetime}T${hour.datetime}`)
+    );
+    hourlyForecastWrapper.appendChild(hourlyForecastTime);
+
+    const hourlyForecastIcon = document.createElement('img');
+    hourlyForecastIcon.classList.add('hourly-forecast-icon');
+    hourlyForecastWrapper.appendChild(hourlyForecastIcon);
+    (async () => {
+      const weatherConditionSrc = await import(
+        `../../assets/img/${hour.icon}.svg`
+      );
+
+      hourlyForecastIcon.src = weatherConditionSrc.default;
+      hourlyForecastIcon.alt = 'Current Condition Icon';
+    })();
+
+    const hourlyForecastTemp = document.createElement('p');
+    hourlyForecastTemp.classList.add('hourly-forecast-temperature');
+    hourlyForecastTemp.id = hour.datetime;
+    hourlyForecastTemp.textContent = `${hour.temp} °C`;
+    hourlyForecastWrapper.appendChild(hourlyForecastTemp);
+  });
+};
+
+const renderDailyForecastContainer = (weatherInformation, processedData) => {
+  const dailyForecastTitle = document.createElement('h1');
+  dailyForecastTitle.classList.add('daily-forecast-title');
+  dailyForecastTitle.textContent = 'Daily';
+  weatherInformation.appendChild(dailyForecastTitle);
+
+  const dailyForecastContainer = document.createElement('div');
+  dailyForecastContainer.classList.add('daily-forecast-container');
+  weatherInformation.appendChild(dailyForecastContainer);
+
+  const hourlyForecast = processedData.forecastData;
+  hourlyForecast.forEach((day) => {
+    const dailyForecastWrapper = document.createElement('div');
+    dailyForecastWrapper.classList.add('daily-forecast-wrapper');
+    dailyForecastContainer.appendChild(dailyForecastWrapper);
+
+    const leftWrapper = document.createElement('div');
+    leftWrapper.classList.add('daily-forecast-left-wrapper');
+    dailyForecastWrapper.appendChild(leftWrapper);
+
+    const currentDay = document.createElement('h3');
+    currentDay.classList.add('daily-forecast-day');
+    currentDay.textContent = `${getDayOfTheWeek(day.datetime)}, ${formatDate(day.datetime)}`;
+    leftWrapper.appendChild(currentDay);
+
+    const currentConditions = document.createElement('p');
+    currentConditions.classList.add('daily-forecast-conditions');
+    currentConditions.textContent = day.conditions;
+    leftWrapper.appendChild(currentConditions);
+
+    const dailyForecastIcon = document.createElement('img');
+    dailyForecastIcon.classList.add('daily-forecast-icon');
+    dailyForecastWrapper.appendChild(dailyForecastIcon);
+
+    (async () => {
+      const weatherConditionSrc = await import(
+        `../../assets/img/${day.icon}.svg`
+      );
+
+      dailyForecastIcon.src = weatherConditionSrc.default;
+      dailyForecastIcon.alt = 'Current Condition Icon';
+    })();
+
+    const rightWrapper = document.createElement('div');
+    rightWrapper.classList.add('daily-forecast-right-wrapper');
+    dailyForecastWrapper.appendChild(rightWrapper);
+
+    const dailyForecastMinmax = document.createElement('p');
+    dailyForecastMinmax.classList.add('daily-forecast-temperature');
+    dailyForecastMinmax.id = day.datetime;
+    dailyForecastMinmax.textContent = `${day.temp} °C`;
+    rightWrapper.appendChild(dailyForecastMinmax);
+
+    const dailyForecastRain = document.createElement('p');
+    dailyForecastRain.classList.add('daily-forecast-precipprob');
+    dailyForecastRain.id = day.datetime;
+    dailyForecastRain.textContent = `Chance Of Rain: ${day.precipprob} %`;
+    rightWrapper.appendChild(dailyForecastRain);
+  });
 };

@@ -18,26 +18,41 @@ const handleUnitChange = (processedData, isMetric) => {
 
   const temperatureMapper = {
     '.current-temperature': processedData.temperature,
-    '.feels-like-temperature': processedData.feelsLike,
     '#max-temp': processedData.currentMinmaxTemp.maxTemp,
     '#min-temp': processedData.currentMinmaxTemp.minTemp,
+    '.feels-like-temperature': processedData.feelsLike,
+    '.hourly-forecast-temperature': processedData.forecastDataHours,
+    '.daily-forecast-temperature': processedData.forecastData,
   };
 
-  for (let temp in temperatureMapper) {
-    const temperature = document.querySelector(temp);
-    temperature.textContent = '';
-    if (temp === '#max-temp') {
-      temperature.textContent = 'H: ';
-    } else if (temp === '#min-temp') {
-      temperature.textContent = 'L: ';
-    } else if (temp === '.feels-like-temperature') {
-      temperature.textContent = 'Feels Like: ';
-    }
+  for (let tempKey in temperatureMapper) {
+    const temperatureElements = document.querySelectorAll(tempKey);
+    temperatureElements.forEach((temperatureElement) => {
+      temperatureElement.textContent = '';
+      if (tempKey === '#max-temp') {
+        temperatureElement.textContent = 'H: ';
+      } else if (tempKey === '#min-temp') {
+        temperatureElement.textContent = 'L: ';
+      } else if (tempKey === '.feels-like-temperature') {
+        temperatureElement.textContent = 'Feels Like: ';
+      }
+      let celsiusTemperature;
+      if (
+        tempKey === '.hourly-forecast-temperature' ||
+        tempKey === '.daily-forecast-temperature'
+      ) {
+        let tempObject = temperatureMapper[tempKey].find(
+          (tempItem) => temperatureElement.id === tempItem.datetime
+        );
 
-    const celsiusTemperature = temperatureMapper[temp];
-    const fahrenheitTemperature =
-      celsiusToFahrenheit(celsiusTemperature).toFixed(1);
-    temperature.textContent += `${isMetric ? celsiusTemperature : fahrenheitTemperature} ${temperatureSign}`;
+        celsiusTemperature = tempObject.temp;
+      } else {
+        celsiusTemperature = temperatureMapper[tempKey];
+      }
+      const fahrenheitTemperature =
+        celsiusToFahrenheit(celsiusTemperature).toFixed(1);
+      temperatureElement.textContent += `${isMetric ? celsiusTemperature : fahrenheitTemperature} ${temperatureSign}`;
+    });
   }
 
   const windSpeed = document.querySelector('#windspeed .misc-data-value');
