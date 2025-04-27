@@ -1,7 +1,10 @@
+import { showLoading } from '../ui/addLoading.js';
+
 export default async (location, isGeolocation) => {
   const VISUAL_CROSSING_API_KEY = 'FYE3FRSLPHW96PES77BBKQUBS';
   const OPENCAGE_API_KEY = '2b6a2dd80bd6466896cd2800bd78a154';
 
+  const loadingComponent = showLoading();
   try {
     if (!isGeolocation) {
       const response = await fetch(
@@ -27,5 +30,7 @@ export default async (location, isGeolocation) => {
     }
   } catch (e) {
     console.log(e);
+  } finally {
+    loadingComponent.remove();
   }
 };

@@ -63,4 +63,4 @@ npm run serve
 - [x] Changing a adding icons to change when the weather condition changes
 - [x] Adding Hourly and Weekly Forecast
 - [x] Adding Geolocation to show local weather on load
-- [ ] Adding loading component while waiting for the API calls
+- [x] Adding loading component while waiting for the API calls
