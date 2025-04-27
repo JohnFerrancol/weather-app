@@ -1,35 +1,47 @@
 import { celsiusToFahrenheit, kmhToMph } from '../utils/conversionOfUnits.js';
 
 export default (processedData) => {
-  const checkBox = document.querySelector('.switch > input');
+  const radios = document.querySelectorAll('.toggle-units > input');
+  const metricToggle = radios[0];
 
-  handleUnitChange(processedData, checkBox.checked);
-
-  checkBox.addEventListener('change', () => {
-    handleUnitChange(processedData, checkBox.checked);
+  handleUnitChange(processedData, metricToggle.checked);
+  radios.forEach((toggle) => {
+    toggle.addEventListener('change', () => {
+      handleUnitChange(processedData, metricToggle.checked);
+    });
   });
 };
 
-const handleUnitChange = (processedData, isImperial) => {
-  const temperatureSign = isImperial ? '°F' : '°C';
-  const speedSign = isImperial ? 'mph' : 'km/h';
+const handleUnitChange = (processedData, isMetric) => {
+  const temperatureSign = isMetric ? '°C' : '°F';
+  const speedSign = isMetric ? 'km/h' : 'mph';
 
-  const temperature = document.querySelector('.temperature');
-  const celsiusTemperature = processedData.temperature;
-  const fahrenheitTemperature = celsiusToFahrenheit(
-    processedData.temperature
-  ).toFixed(1);
-  temperature.textContent = `${isImperial ? fahrenheitTemperature : celsiusTemperature} ${temperatureSign}`;
+  const temperatureMapper = {
+    '.current-temperature': processedData.temperature,
+    '.feels-like-temperature': processedData.feelsLike,
+    '#max-temp': processedData.currentMinmaxTemp.maxTemp,
+    '#min-temp': processedData.currentMinmaxTemp.minTemp,
+  };
 
-  const feelsLike = document.querySelector('#feelslike .misc-data-value');
-  const celsiusFeelsLikeTemperature = processedData.misc.feelslike;
-  const fahrenheitFeelsLikeTemperature = celsiusToFahrenheit(
-    processedData.misc.feelslike
-  ).toFixed(1);
-  feelsLike.textContent = `${isImperial ? fahrenheitFeelsLikeTemperature : celsiusFeelsLikeTemperature} ${temperatureSign}`;
+  for (let temp in temperatureMapper) {
+    const temperature = document.querySelector(temp);
+    temperature.textContent = '';
+    if (temp === '#max-temp') {
+      temperature.textContent = 'H: ';
+    } else if (temp === '#min-temp') {
+      temperature.textContent = 'L: ';
+    } else if (temp === '.feels-like-temperature') {
+      temperature.textContent = 'Feels Like: ';
+    }
+
+    const celsiusTemperature = temperatureMapper[temp];
+    const fahrenheitTemperature =
+      celsiusToFahrenheit(celsiusTemperature).toFixed(1);
+    temperature.textContent += `${isMetric ? celsiusTemperature : fahrenheitTemperature} ${temperatureSign}`;
+  }
 
   const windSpeed = document.querySelector('#windspeed .misc-data-value');
   const windSpeedKmh = processedData.misc.windspeed;
   const windSpeedMph = kmhToMph(processedData.misc.windspeed).toFixed(1);
-  windSpeed.textContent = `${isImperial ? windSpeedMph : windSpeedKmh} ${speedSign}`;
+  windSpeed.textContent = `${isMetric ? windSpeedKmh : windSpeedMph} ${speedSign}`;
 };

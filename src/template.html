@@ -17,17 +17,38 @@
           required
         />
 
-        <button type="submit" class="submit-button">Submit</button>
+        <button type="submit" class="submit-button">
+          <img
+            src="./assets/logos/magnify.svg"
+            alt="search-icon"
+            class="search-icon"
+          />
+        </button>
+        <div class="toggle-units">
+          <input
+            type="radio"
+            id="toggle-metric"
+            name="toggle-units"
+            value="metric"
+            checked="checked"
+          />
+          <input
+            type="radio"
+            id="toggle-imperial"
+            name="toggle-units"
+            value="imperial"
+          />
+          <label for="toggle-metric">Metric</label>
+          <label for="toggle-imperial">Imperial</label>
+          <div class="toggle-wrapper">
+            <div class="toggle">
+              <div>Metric</div>
+              <div>Imperial</div>
+            </div>
+          </div>
+        </div>
       </form>
 
-      <div class="toggle-units">
-        <span>Metric</span>
-        <label class="switch">
-          <input type="checkbox" />
-          <span class="slider round"></span>
-        </label>
-        <span>Imperial</span>
-      </div>
       <div class="weather-information"></div>
     </main>
   </body>

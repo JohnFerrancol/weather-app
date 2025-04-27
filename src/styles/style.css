@@ -17,13 +17,20 @@
 }
 
 :root {
-  --body-background: #222;
-  --main-background: linear-gradient(to bottom right, #00feba, #5b548a);
+  --primary-color: #242424;
+  --secondary-color: #373737;
   --font-regular: 'Poppins';
   --font-bold: 'Poppins-Bold';
-  --main-text-color: #ffffff;
+  --main-text-color: #fafafa;
+  --secondary-text-color: #b0afaf;
   --change-svg-color-white: invert(99%) sepia(72%) saturate(2%)
     hue-rotate(76deg) brightness(111%) contrast(100%);
+  --change-svg-color-primary: invert(10%) sepia(0%) saturate(0%)
+    hue-rotate(251deg) brightness(98%) contrast(90%);
+  --switches-bg-color: var(--secondary-color);
+  --switches-label-color: var(--main-text-color);
+  --switch-bg-color: var(--main-text-color);
+  --switch-text-color: var(--secondary-color);
 }
 
 * {
@@ -33,128 +40,152 @@
 }
 
 body {
-  background: var(--body-background);
+  background-color: var(--primary-color);
+  font-family: var(--font-regular);
+  min-width: 100vw;
   display: flex;
   justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  font-family: var(--font-regular);
 }
 
 main.app-container {
-  width: 25vw;
-  height: 50vh;
-  background: var(--main-background);
   color: var(--main-text-color);
-  border-radius: 1rem;
-  padding: 1rem;
+  padding: 3rem 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 main .change-location-form {
-  height: 20%;
-  display: flex;
+  display: grid;
   justify-content: center;
   align-items: center;
+  grid-template-columns: 7fr 2fr;
+  position: relative;
 }
 
 main .change-location-input {
-  background: none;
+  background-color: var(--secondary-color);
   color: var(--main-text-color);
-  border: 2px solid var(--main-text-color);
-  border-radius: 0.5rem;
+  border-radius: 2rem;
+  border: none;
   font-family: inherit;
-  font-size: 1.2rem;
-  padding: 0.5rem 1rem;
-  margin-right: 1rem;
-}
-
-main .change-location-input::placeholder {
-  color: var(--main-text-color);
+  font-size: 1.3rem;
+  padding: 1rem 3.5rem;
+  margin-right: 4rem;
 }
 
 main .change-location-input:focus {
   outline: none;
-  border: 3px solid var(--main-text-color);
 }
 
 main .submit-button {
-  background: none;
-  color: var(--main-text-color);
-  border: 2px solid var(--main-text-color);
-  border-radius: 0.5rem;
-  font-family: inherit;
-  font-size: 1.2rem;
-  padding: 0.5rem 2rem;
-}
-
-main .toggle-units {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
-
-main .switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-main .switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* The slider */
-main .slider {
   position: absolute;
+  background: none;
+  border: none;
+  top: 1rem;
+  left: 1rem;
+}
+
+main .submit-button:hover {
   cursor: pointer;
+}
+
+main .search-icon {
+  width: 2rem;
+  filter: var(--change-svg-color-white);
+}
+
+.toggle-units {
+  width: 16rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background: var(--switches-bg-color);
+  line-height: 3rem;
+  border-radius: 3rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* input (radio) for toggling. hidden - use labels for clicking on */
+.toggle-units input {
+  visibility: hidden;
+  position: absolute;
+  top: 0;
+}
+
+/* labels for the input (radio) boxes - something to click on */
+.toggle-units label {
+  width: 50%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  cursor: pointer;
+  color: var(--switches-label-color);
+}
+
+.toggle-wrapper {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
+  padding: 0.15rem;
+  z-index: 3;
+  transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+  /* transition: transform 1s; */
+}
+
+/* switch box highlighter */
+.toggle {
+  border-radius: 3rem;
+  background: var(--switch-bg-color);
+  height: 100%;
+}
+
+/* switch box labels
+  - default setup
+  - toggle afterwards based on radio:checked status 
+*/
+.toggle div {
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  display: block;
+  color: var(--switch-text-color);
+  transition: opacity 0.2s cubic-bezier(0.77, 0, 0.175, 1) 0.125s;
+  will-change: opacity;
+  position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
 }
 
-main .slider:before {
-  position: absolute;
-  content: '';
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  -webkit-transition: 0.4s;
-  transition: 0.4s;
+/* slide the switch box from right to left */
+.toggle-units input:nth-of-type(1):checked ~ .togglr-wrapper {
+  transform: translateX(0%);
 }
 
-main input:checked + .slider {
-  background: var(--main-background);
+/* slide the switch box from left to right */
+.toggle-units input:nth-of-type(2):checked ~ .toggle-wrapper {
+  transform: translateX(100%);
 }
 
-main input:focus + .slider {
-  box-shadow: 0 0 1px #2196f3;
+/* toggle the switch box labels - first checkbox:checked - show first switch div */
+.toggle-units
+  input:nth-of-type(1):checked
+  ~ .toggle-wrapper
+  .toggle
+  div:nth-of-type(1) {
+  opacity: 1;
 }
 
-main input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
-}
-
-main .slider.round {
-  border-radius: 34px;
-}
-
-main .slider.round:before {
-  border-radius: 50%;
+/* toggle the switch box labels - second checkbox:checked - show second switch div */
+.toggle-units
+  input:nth-of-type(2):checked
+  ~ .toggle-wrapper
+  .toggle
+  div:nth-of-type(2) {
+  opacity: 1;
 }
 
 main .weather-information {
@@ -166,38 +197,111 @@ main .weather-information {
   padding: 1rem;
 }
 
-main .current-condition,
-main .resolved-address,
-main .temperature {
+main .current-condition-container {
+  display: flex;
+  width: 100%;
+  padding: 2.5rem 5rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+main .current-condition-left,
+.current-condition-right {
+  display: flex;
+  flex-direction: column;
+}
+
+main .current-condition-left {
+  width: 50%;
+  gap: 1rem;
+}
+
+main .location-wrapper {
+  display: flex;
+  gap: 1rem;
+  background-color: var(--main-text-color);
+  padding: 1rem;
+  border-radius: 3rem;
+}
+
+main .location-wrapper-icon {
+  width: 2rem;
+  filter: var(--change-svg-color-primary);
+}
+
+main .location-wrapper-text {
+  color: var(--primary-color);
+  font-size: 1.5rem;
+}
+
+main .current-day {
   font-family: var(--font-bold);
+  font-size: 2rem;
+}
+
+main .current-date {
+  color: var(--secondary-text-color);
+}
+
+main .current-temperature {
   text-align: center;
+  font-size: 3rem;
+  font-family: var(--font-bold);
+}
+
+main .min-max-wrapper {
+  align-self: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3rem;
+}
+
+main .temp-wrapper {
+  justify-self: center;
+  display: flex;
+  gap: 1rem;
+}
+
+main .temp-wrapper-icon {
+  filter: var(--change-svg-color-white);
+  width: 2rem;
+}
+
+main .temp-wrapper-temperature {
+  color: var(--secondary-text-color);
+}
+
+main .current-condition-right {
+  align-items: center;
+  gap: 2rem;
+}
+
+main .weather-condition-icon {
+  width: 10rem;
 }
 
 main .current-condition {
-  font-size: 2rem;
+  font-family: var(--font-bold);
 }
 
-main .resolved-address {
-  font-size: 2rem;
-}
-
-main .tempaerature {
-  font-size: 2.5rem;
+main .feels-like-temperature {
+  color: var(--secondary-text-color);
 }
 
 main .misc-information-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 1rem 2rem;
-  justify-content: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 
 main .misc-data-wrapper {
-  font-size: 1.5rem;
+  background-color: var(--secondary-color);
+  padding: 2rem;
+  border-radius: 1rem;
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   align-items: center;
+  justify-content: center;
 }
 
 main .misc-data-icon {
@@ -209,4 +313,13 @@ main .misc-data-text {
   display: flex;
   flex-direction: column;
   gap: 0.2rem;
+}
+
+main .misc-data-name {
+  font-size: 1.25rem;
+}
+
+main .misc-data-value {
+  font-size: 1.5rem;
+  font-family: var(--font-bold);
 }
