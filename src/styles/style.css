@@ -310,6 +310,7 @@ main .current-condition-right {
 
 main .weather-condition-icon {
   width: 7.5rem;
+  filter: var(--change-svg-color-white);
 }
 
 main .current-condition {
@@ -384,6 +385,7 @@ main .hourly-forecast-wrapper {
 main .hourly-forecast-icon {
   width: 3rem;
   height: 2rem;
+  filter: var(--change-svg-color-white);
 }
 
 main .daily-forecast-container {
@@ -412,4 +414,5 @@ main .daily-forecast-icon {
   justify-self: center;
   width: 5rem;
   height: 4rem;
+  filter: var(--change-svg-color-white);
 }
