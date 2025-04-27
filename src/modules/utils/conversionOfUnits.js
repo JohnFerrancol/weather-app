@@ -1,3 +1,4 @@
+// Functions to convert units from metric to imperial
 const celsiusToFahrenheit = (temp) => {
   return (temp * 9) / 5 + 32;
 };

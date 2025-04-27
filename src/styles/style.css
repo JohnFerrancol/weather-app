@@ -54,7 +54,6 @@ main .loader {
   border: 5px solid var(--main-text-color);
   border-bottom-color: var(--secondary-text-color);
   border-radius: 50%;
-  display: inline-block;
   box-sizing: border-box;
   animation: rotation 1s linear infinite;
 }
@@ -66,6 +65,16 @@ main .loader {
   100% {
     transform: rotate(360deg);
   }
+}
+
+main .error-message {
+  font-family: var(--font-bold);
+  margin-top: 10rem;
+}
+
+main .error-icon {
+  filter: var(--change-svg-color-white);
+  width: 20rem;
 }
 
 main.app-container {

@@ -1,4 +1,5 @@
 export default (response) => {
+  // Filter the current response JSON to all of teh data we need for the weather app
   const currentConditions = response.currentConditions;
 
   return {

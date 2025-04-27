@@ -1,4 +1,5 @@
-const showLoading = () => {
+// While waiting for the response from the API, remove all components in the DOM and display a loader
+export default () => {
   const weatherInformation = document.querySelector('.weather-information');
   weatherInformation.innerHTML = '';
   const loadingComponent = document.createElement('div');
@@ -6,5 +7,3 @@ const showLoading = () => {
   weatherInformation.appendChild(loadingComponent);
   return loadingComponent;
 };
-
-export { showLoading };

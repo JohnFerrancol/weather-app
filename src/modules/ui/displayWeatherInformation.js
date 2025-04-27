@@ -9,7 +9,7 @@ import checkToggle from './checkToggle';
 import { getDayOfTheWeek, formatDate, formatTime } from '../utils/dateUtils';
 
 export default (processedData) => {
-  console.log(processedData);
+  // Clear all of the information on the weather information container and render the following sections of the code passing in the weather information container and the data
   let weatherInformation = document.querySelector('.weather-information');
   weatherInformation.innerHTML = '';
 
@@ -20,6 +20,7 @@ export default (processedData) => {
   checkToggle(processedData);
 };
 
+// Function used to the render the current condition of the location in the webpage
 const renderCurrentConditionContainer = (weatherInformation, processedData) => {
   const currentConditionContainer = document.createElement('div');
   currentConditionContainer.classList.add('current-condition-container');
@@ -98,6 +99,8 @@ const renderCurrentConditionContainer = (weatherInformation, processedData) => {
   const weatherConditionIcon = document.createElement('img');
   currentConditionRight.appendChild(weatherConditionIcon);
   weatherConditionIcon.classList.add('weather-condition-icon');
+
+  // This async function is used to dynamically render the svg file from the icon attrivute from the data given
   (async () => {
     const weatherConditionSrc = await import(
       `../../assets/img/${processedData.icon}.svg`
@@ -153,6 +156,7 @@ const renderMiscInformationContainer = (weatherInformation, processedData) => {
 
     const miscDataTextValue = document.createElement('p');
     miscDataTextValue.classList.add('misc-data-value');
+    // If the value is undefined, just put it as 0
     const miscDataTextNumber = miscInformationData[miscData]
       ? miscInformationData[miscData]
       : 0;
@@ -187,6 +191,7 @@ const renderHourlyForecastContainer = (weatherInformation, processedData) => {
     const hourlyForecastIcon = document.createElement('img');
     hourlyForecastIcon.classList.add('hourly-forecast-icon');
     hourlyForecastWrapper.appendChild(hourlyForecastIcon);
+    // This async function is used to dynamically render the svg file from the icon attrivute from the data given
     (async () => {
       const weatherConditionSrc = await import(
         `../../assets/img/${hour.icon}.svg`
@@ -238,6 +243,7 @@ const renderDailyForecastContainer = (weatherInformation, processedData) => {
     dailyForecastIcon.classList.add('daily-forecast-icon');
     dailyForecastWrapper.appendChild(dailyForecastIcon);
 
+    // This async function is used to dynamically render the svg file from the icon attrivute from the data given
     (async () => {
       const weatherConditionSrc = await import(
         `../../assets/img/${day.icon}.svg`

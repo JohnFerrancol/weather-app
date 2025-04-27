@@ -1,4 +1,6 @@
+// Function that allows the user to get its current location
 export default (callback) => {
+  // If the geolocation is valid, get the longitude and latitude and call a callback function based on this values
   if ('geolocation' in navigator) {
     navigator.geolocation.getCurrentPosition(
       (position) => {
