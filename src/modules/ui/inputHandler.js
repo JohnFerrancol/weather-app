@@ -6,7 +6,7 @@ export default async () => {
   changeLocationForm.addEventListener('submit', (event) => {
     event.preventDefault();
     const newLocation = document.querySelector('#location').value.trim();
-    handleLocationRefresh(newLocation, 'metric');
+    handleLocationRefresh(newLocation, false);
     changeLocationForm.reset();
   });
 };
